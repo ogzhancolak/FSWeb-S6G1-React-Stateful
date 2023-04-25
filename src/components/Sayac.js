@@ -18,7 +18,7 @@ ADIM 0:
   Aşağıdaki bileşeni inceleyerek ve state hookunu import ederek başlayın.
 
 ADIM 1:
-  State hookunu kullanara, bir 'sayici', 'setSayici' çifti oluşturun.
+  State hookunu kullanarak, bir 'sayici', 'setSayici' çifti oluşturun.
   'sayici' state'inin ilk değeri 0 olarak yüklenmelidir.
 
 ADIM 2:
@@ -46,31 +46,35 @@ ADIM 6:
 */
 
 import React from 'react'; /* ADIM 0 buraya*/
+import { useState } from 'react';
 
 export default function Sayac() {
   /* ADIM 1 buraya*/
-	
+  const {sayac, setSayac} = useState(0);
 	
   const artirici = () => {
     /* ADIM 4 buraya */
+    setSayac(sayac++);
   };
   const azaltici = () => {
     /* ADIM 5 */
+    setSayac(sayac--);
   };
   const reset = () => {
+    setSayac(0);
   };
 
   const stil = {
     fontSize: '1.5em',
     marginBottom: '0.3em',
-    color: 'royalblue', /* ADIM 2 */
+    color: sayac % 2 == 0 ? 'royalblue' : 'crimson' /* ADIM 2 */
   };
 
   return (
     <div className='widget-counter container'>
       <h2>Sayaç</h2>
       <div id='sayici' style={stil}>
-        Sayı {sayici} {/* ADIM 3  buraya*/ }
+        Sayı {sayici} {sayac % 2 == 0 ? 'çift' : 'tek'}
       </div>
       <div>
         <button id='artirici' onClick={artirici}>Artırıcı</button>
